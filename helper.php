@@ -561,11 +561,27 @@ class ModTweetDisplayBackHelper
 		// Display the time the tweet was created
 		if ($params->get('tweetCreated', 1) == 1)
 		{
-			$twitter[$i]->tweet->created .= '<a href="http://twitter.com/'.$o['user']['screen_name'].'/status/'.$o['id_str'].'" rel="nofollow">';
+			$ISOtime = JHTML::date($o['created_at'], 'Y-m-d H:i:s');
+			$twitter[$i]->tweet->created .= '<a class="TDB-date" href="http://twitter.com/'.$o['user']['screen_name'].'/status/'.$o['id_str'].'" rel="nofollow" title="'.$ISOtime.'">';
 			// Determine whether to display the time as a relative or static time
 			if ($params->get('tweetRelativeTime', 1) == 1)
 			{
-				$twitter[$i]->tweet->created .= self::renderRelativeTime($o['created_at']).'</a>';
+				// Script requires MooTools Core 1.3.1, not present before J! 1.7
+				if (version_compare(JVERSION, '1.7.0', 'ge'))
+				{
+					// Load the relative time text to JavaScript
+					self::textToScript();
+
+					// Load the JavaScript; first ensure we have MooTools Core
+					JHtml::_('behavior.framework');
+					JHtml::script('modules/mod_tweetdisplayback/media/js/prettydate.js', false, false);
+					$twitter[$i]->tweet->created .= JHtml::date($o['created_at'], 'c').'</a>';
+				}
+				// Render a static time
+				else
+				{
+					$twitter[$i]->tweet->created .= self::renderRelativeTime($o['created_at']).'</a>';
+				}
 			}
 			else
 			{
@@ -630,6 +646,7 @@ class ModTweetDisplayBackHelper
 	 * @return  string  The converted date string
 	 *
 	 * @since   1.0
+	 * @deprecated  Will be removed when full J! 1.5 support is dropped
 	 */
 	static protected function renderRelativeTime($date)
 	{
@@ -713,6 +730,26 @@ class ModTweetDisplayBackHelper
 		{
 			return JText::sprintf('MOD_TWEETDISPLAYBACK_RETWEETS', $count);
 		}
+	}
+
+	/**
+	 * Function to add relative time measures to JavaScript
+	 *
+	 * @return  void
+	 *
+	 * @since   2.1
+	 */
+	static protected function textToScript()
+	{
+		JText::script('MOD_TWEETDISPLAYBACK_CREATE_LESSTHANAMINUTE');
+		JText::script('MOD_TWEETDISPLAYBACK_CREATE_MINUTE');
+		JText::script('MOD_TWEETDISPLAYBACK_CREATE_MINUTES');
+		JText::script('MOD_TWEETDISPLAYBACK_CREATE_HOUR');
+		JText::script('MOD_TWEETDISPLAYBACK_CREATE_HOURS');
+		JText::script('MOD_TWEETDISPLAYBACK_CREATE_DAY');
+		JText::script('MOD_TWEETDISPLAYBACK_CREATE_DAYS');
+		JText::script('MOD_TWEETDISPLAYBACK_CREATE_WEEK');
+		JText::script('MOD_TWEETDISPLAYBACK_CREATE_WEEKS');
 	}
 
 	/**

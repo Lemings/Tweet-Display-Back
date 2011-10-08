@@ -117,3 +117,9 @@ else
 
 // Build the output
 require JModuleHelper::getLayoutPath('mod_tweetdisplayback', $output);
+
+if (version_compare(JVERSION, '1.7.0', 'ge') && $params->get('tweetRelativeTime', 1) == 1 && !in_array('<script type="text/javascript">window.addEvent("domready", function() { $$("a.TDB-time").prettyDate();});</script>', $document->_custom))
+{
+	$document->addCustomTag('<script type="text/javascript">window.addEvent("domready", function() { $$("a.TDB-time").prettyDate();});</script>');
+}
+
