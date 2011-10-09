@@ -20,18 +20,6 @@ provides: [PrettyDate]
          /* Implements */
          Implements: [Options],
 
-         /* options */
-         options: {
-             now      : Joomla.JText._('MOD_TWEETDISPLAYBACK_CREATE_LESSTHANAMINUTE'),
-             minute   : Joomla.JText._('MOD_TWEETDISPLAYBACK_CREATE_MINUTE'),
-             minutes  : Joomla.JText._('MOD_TWEETDISPLAYBACK_CREATE_MINUTES'),
-             hour     : Joomla.JText._('MOD_TWEETDISPLAYBACK_CREATE_HOUR'),
-             hours    : Joomla.JText._('MOD_TWEETDISPLAYBACK_CREATE_HOURS'),
-             yesterday: Joomla.JText._('MOD_TWEETDISPLAYBACK_CREATE_DAY'),
-             days     : Joomla.JText._('MOD_TWEETDISPLAYBACK_CREATE_DAYS'),
-             weeks    : Joomla.JText._('MOD_TWEETDISPLAYBACK_CREATE_WEEKS')
-         },
-
          /* constructor of class - initialize */
          initialize: function(elems,options) {
 

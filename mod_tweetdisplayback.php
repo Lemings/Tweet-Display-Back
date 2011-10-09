@@ -120,5 +120,20 @@ require JModuleHelper::getLayoutPath('mod_tweetdisplayback', $output);
 
 if (version_compare(JVERSION, '1.7.0', 'ge') && $params->get('tweetRelativeTime', 1) == 1)
 {
-	$document->addCustomTag("<script type=\"text/javascript\">window.addEvent('domready', function() { $$('a.TDB-time').prettyDate();});</script>");
+	$script='<script type="text/javascript">'
+			.'window.addEvent("domready", function() {'
+			.'var options = {'
+			.'now      : "'.JText::_('MOD_TWEETDISPLAYBACK_CREATE_LESSTHANAMINUTE').'",'
+			.'minute   : "'.JText::_('MOD_TWEETDISPLAYBACK_CREATE_MINUTE').'",'
+			.'minutes  : "'.JText::_('MOD_TWEETDISPLAYBACK_CREATE_MINUTES').'",'
+			.'hour     : "'.JText::_('MOD_TWEETDISPLAYBACK_CREATE_HOUR').'",'
+			.'hours    : "'.JText::_('MOD_TWEETDISPLAYBACK_CREATE_HOURS').'",'
+			.'yesterday: "'.JText::_('MOD_TWEETDISPLAYBACK_CREATE_DAY').'",'
+			.'days     : "'.JText::_('MOD_TWEETDISPLAYBACK_CREATE_DAYS').'",'
+			.'weeks    : "'.JText::_('MOD_TWEETDISPLAYBACK_CREATE_WEEKS').'"'
+			.'};'
+			.'$$("a.TDB-time").prettyDate(options);'
+			.'});'
+			. '</script>';
+	$document->addCustomTag($script);
 }
