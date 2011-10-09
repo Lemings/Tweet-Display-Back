@@ -575,7 +575,7 @@ class ModTweetDisplayBackHelper
 					// Load the JavaScript; first ensure we have MooTools Core
 					JHtml::_('behavior.framework');
 					JHtml::script('modules/mod_tweetdisplayback/media/js/prettydate.js', false, false);
-					$twitter[$i]->tweet->created .= JHtml::date($o['created_at'], 'c').'</a>';
+					$twitter[$i]->tweet->created .= JHtml::date($o['created_at'], 'D M d H:i:s O Y').'</a>';
 				}
 				// Render a static time
 				else
