@@ -746,7 +746,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @return  void
 	 *
-	 * @since   2.1
+	 * @since   2.2
 	 */
 	static protected function textToScript()
 	{

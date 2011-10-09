@@ -22,14 +22,14 @@ provides: [PrettyDate]
 
          /* options */
          options: {
-             now      : "just now",
-             minute   : "about 1 minute ago",
-             minutes  : "about {x} minutes ago",
-             hour     : "about 1 hour ago",
-             hours    : "about {x} hours ago",
-             yesterday: " yesterday",
-             days     : " about {x} days ago",
-             weeks    : " about {x} weeks ago"
+             now      : Joomla.JText._('MOD_TWEETDISPLAYBACK_CREATE_LESSTHANAMINUTE'),
+             minute   : Joomla.JText._('MOD_TWEETDISPLAYBACK_CREATE_MINUTE'),
+             minutes  : Joomla.JText._('MOD_TWEETDISPLAYBACK_CREATE_MINUTES'),
+             hour     : Joomla.JText._('MOD_TWEETDISPLAYBACK_CREATE_HOUR'),
+             hours    : Joomla.JText._('MOD_TWEETDISPLAYBACK_CREATE_HOURS'),
+             yesterday: Joomla.JText._('MOD_TWEETDISPLAYBACK_CREATE_DAY'),
+             days     : Joomla.JText._('MOD_TWEETDISPLAYBACK_CREATE_DAYS'),
+             weeks    : Joomla.JText._('MOD_TWEETDISPLAYBACK_CREATE_WEEKS')
          },
 
          /* constructor of class - initialize */
@@ -68,13 +68,13 @@ provides: [PrettyDate]
                return day_diff == 0 && (
                           diff < 60 && this.options.now || 
                           diff < 120 && this.options.minute || 
-                          diff < 3600  &&  this.options.minutes.replace("{x}",Math.floor( diff / 60)) ||
+                          diff < 3600  &&  this.options.minutes.replace("%s",Math.floor( diff / 60)) ||
                           diff < 7200  &&  this.options.hour || 
-                          diff < 86400 &&  this.options.hours.replace("{x}",Math.floor(diff / 3600))
+                          diff < 86400 &&  this.options.hours.replace("%s",Math.floor(diff / 3600))
                           ) ||
                           day_diff == 1 && this.options.yesterday || 
-                               day_diff < 7 && this.options.days.replace("{x}",day_diff) ||
-                                      day_diff < 31  && this.options.weeks.replace("{x}",Math.ceil( day_diff / 7 ));
+                               day_diff < 7 && this.options.days.replace("%s",day_diff) ||
+                                      day_diff < 31  && this.options.weeks.replace("%s",Math.ceil( day_diff / 7 ));
           },
 
           /* get the current date */
