@@ -571,7 +571,7 @@ class ModTweetDisplayBackHelper
 		if ($params->get('tweetCreated', 1) == 1)
 		{
 			$ISOtime = JHTML::date($o['created_at'], 'Y-m-d H:i:s');
-			$twitter[$i]->tweet->created .= '<a class="TDB-date" href="http://twitter.com/'.$o['user']['screen_name'].'/status/'.$o['id_str'].'" rel="nofollow" title="'.$ISOtime.'">';
+			$twitter[$i]->tweet->created .= '<a class="TDB-time" href="http://twitter.com/'.$o['user']['screen_name'].'/status/'.$o['id_str'].'" rel="nofollow" title="'.$ISOtime.'">';
 			// Determine whether to display the time as a relative or static time
 			if ($params->get('tweetRelativeTime', 1) == 1)
 			{
